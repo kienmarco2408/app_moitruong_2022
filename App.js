@@ -1,20 +1,164 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { useFonts } from 'expo-font';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Image, SafeAreaView, Text } from 'react-native';
+import AppIntroSlider from 'react-native-app-intro-slider';
+import { Ionicons } from '@expo/vector-icons';
 
-export default function App() {
+import Home from './src/component/screens/Home';
+import Maps from './src/component/screens/Maps';
+import Mission from './src/component/screens/Mission';
+import User from './src/component/screens/User';
+import SignIn from './src/component/screens/SignIn';
+import SignUp from './src/component/screens/SignUp';
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const slides = [
+  {
+    key: 's1',
+    title: 'Ready for take-off',
+    desc: 'Welcome to Adventure Travel, a React Native project for Mobile Apps',
+    image: require('./src/component/storage/images/flatcharacter_01.png'),
+    backgroundColor: '#00A651',
+  },
+  {
+    key: 's2',
+    title: 'Ready for take-off',
+    desc: 'Welcome to Adventure Travel, a React Native project for Mobile Apps',
+    image: require('./src/component/storage/images/flatcharacter_02.png'),
+    backgroundColor: '#00A651',
+  },
+  {
+    key: 's3',
+    title: 'Ready for take-off',
+    desc: 'Welcome to Adventure Travel, a React Native project for Mobile Apps',
+    image: require('./src/component/storage/images/flatcharacter_03.png'),
+    backgroundColor: '#00A651',
+  },
+];
+
+const BottomTabScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarHideOnKeyboard: true,
+        tabBarActiveTintColor: '#FB7A41',
+        tabBarInactiveTintColor: 'grey',
+        tabBarShowLabel: false,
+        headerShown: false,
+        tabBarStyle: {
+          position: 'absolute',
+          borderTopColor: 'rgba(0, 0, 0, .2)',
+          height: 60,
+          shadowOpacity: 0.25,
+        },
+
+        tabBarIcon: ({ focused, size, color }) => {
+          let iconName;
+          if (route.name === 'Home') {
+            iconName = focused ? 'home-outline' : 'home-outline';
+            size = focused ? size + 2 : size + 2;
+          } else if (route.name === 'Maps') {
+            iconName = focused
+              ? 'ios-bookmarks-outline'
+              : 'ios-bookmarks-outline';
+          } else if (route.name === 'Mission') {
+            iconName = focused ? 'md-compass-outline' : 'md-compass-outline';
+          } else if (route.name === 'User') {
+            iconName = focused ? 'person-outline' : 'person-outline';
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+    >
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Maps" component={Maps} />
+      <Tab.Screen name="Mission" component={Mission} />
+      <Tab.Screen name="User" component={User} />
+    </Tab.Navigator>
+  );
+};
+
+function App() {
+  const [showRealApp, setShowRealApp] = useState(false);
+
+  const onDone = () => {
+    setShowRealApp(true);
+  };
+
+  const onSkip = () => {
+    setShowRealApp(true);
+  };
+  const RenderItem = ({ item }) => {
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: item.backgroundColor,
+          alignItems: 'center',
+        }}
+      >
+        <Image
+          style={{
+            marginTop: 120,
+            marginHorizontal: 16,
+          }}
+          source={item.image}
+        />
+        <Text
+          style={{
+            marginTop: 33,
+            fontSize: 32,
+            fontWeight: '700',
+            color: '#FFFFFF',
+          }}
+        >
+          {item.title}
+        </Text>
+        <Text
+          style={{
+            marginTop: 16,
+            fontSize: 16,
+            marginHorizontal: 42,
+            textAlign: 'center',
+            fontWeight: '500',
+            color: '#FFFFFF',
+          }}
+        >
+          {item.desc}
+        </Text>
+      </View>
+    );
+  };
+  return (
+    <>
+      {showRealApp ? (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Signin" component={SignIn} />
+          <Stack.Screen name="Signup" component={SignUp} />
+        </Stack.Navigator>
+      ) : (
+        <AppIntroSlider
+          data={slides}
+          renderItem={RenderItem}
+          onDone={onDone}
+          showSkipButton={true}
+          onSkip={onSkip}
+        />
+      )}
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default () => {
+  return (
+    <NavigationContainer>
+      <App />
+    </NavigationContainer>
+  );
+};
