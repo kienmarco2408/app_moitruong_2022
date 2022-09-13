@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Image, SafeAreaView, Text } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { Ionicons } from '@expo/vector-icons';
+import { Feather, Ionicons } from '@expo/vector-icons';
 
 import Home from './src/component/screens/Home';
 import Maps from './src/component/screens/Maps';
@@ -13,6 +13,7 @@ import Mission from './src/component/screens/Mission';
 import User from './src/component/screens/User';
 import SignIn from './src/component/screens/SignIn';
 import SignUp from './src/component/screens/SignUp';
+import Detail from './src/component/screens/Detail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -46,33 +47,31 @@ const BottomTabScreen = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarHideOnKeyboard: true,
-        tabBarActiveTintColor: '#FB7A41',
+        tabBarActiveTintColor: '#006838',
         tabBarInactiveTintColor: 'grey',
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
           position: 'absolute',
           borderTopColor: 'rgba(0, 0, 0, .2)',
-          height: 60,
+          height: 85,
           shadowOpacity: 0.25,
         },
 
         tabBarIcon: ({ focused, size, color }) => {
           let iconName;
           if (route.name === 'Home') {
-            iconName = focused ? 'home-outline' : 'home-outline';
-            size = focused ? size + 2 : size + 2;
+            iconName = focused ? 'home' : 'home';
+            size = focused ? size : size;
           } else if (route.name === 'Maps') {
-            iconName = focused
-              ? 'ios-bookmarks-outline'
-              : 'ios-bookmarks-outline';
+            iconName = focused ? 'map' : 'map';
           } else if (route.name === 'Mission') {
-            iconName = focused ? 'md-compass-outline' : 'md-compass-outline';
+            iconName = focused ? 'crosshair' : 'crosshair';
           } else if (route.name === 'User') {
-            iconName = focused ? 'person-outline' : 'person-outline';
+            iconName = focused ? 'user' : 'user';
           }
 
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Feather name={iconName} size={size} color={color} />;
         },
       })}
     >
@@ -141,6 +140,8 @@ function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Signin" component={SignIn} />
           <Stack.Screen name="Signup" component={SignUp} />
+          <Stack.Screen name="Detail" component={Detail} />
+          <Stack.Screen name="Bottom" component={BottomTabScreen} />
         </Stack.Navigator>
       ) : (
         <AppIntroSlider
