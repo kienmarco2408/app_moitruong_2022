@@ -49,7 +49,6 @@ const BottomTabScreen = () => {
         tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: '#006838',
         tabBarInactiveTintColor: 'grey',
-        tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
           position: 'absolute',

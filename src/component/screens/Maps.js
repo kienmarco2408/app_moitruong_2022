@@ -211,7 +211,6 @@ const Maps = ({ navigation }) => {
                   numberOfLines={2}
                   style={{
                     fontSize: 20,
-                    fontFamily: 'Poppins_Medium',
                     lineHeight: 30,
                     letterSpacing: -0.3,
                   }}
@@ -227,7 +226,6 @@ const Maps = ({ navigation }) => {
                     color: 'rgba(120, 120, 120, 1)',
                     lineHeight: 18,
                     letterSpacing: -0.3,
-                    fontFamily: 'Poppins_Medium',
                   }}
                 >
                   {marker.description}
@@ -237,7 +235,7 @@ const Maps = ({ navigation }) => {
                 style={{
                   flexDirection: 'row',
                   alignContent: 'center',
-                  fontFamily: 'Poppins_Light',
+
                   paddingTop: 8,
                 }}
               >
