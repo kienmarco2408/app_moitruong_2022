@@ -10,10 +10,10 @@ import { Feather, Ionicons } from '@expo/vector-icons';
 import Home from './src/component/screens/Home';
 import Maps from './src/component/screens/Maps';
 import Mission from './src/component/screens/Mission';
-import User from './src/component/screens/User';
 import SignIn from './src/component/screens/SignIn';
 import SignUp from './src/component/screens/SignUp';
 import Detail from './src/component/screens/Detail';
+import Learn from './src/component/screens/Learn';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -77,7 +77,7 @@ const BottomTabScreen = () => {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Maps" component={Maps} />
       <Tab.Screen name="Mission" component={Mission} />
-      <Tab.Screen name="User" component={User} />
+      <Tab.Screen name="Learn" component={Learn} />
     </Tab.Navigator>
   );
 };
