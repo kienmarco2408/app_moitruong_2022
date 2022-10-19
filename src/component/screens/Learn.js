@@ -1,55 +1,61 @@
-import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { ButtonLearn } from '../screenComponent/ButtonLearn';
-import CardCategories from '../screenComponent/CardCategories';
+import CardCategories from '../screenComponent/Beginner';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import MainScreenNavigator from '../TopNavigation/TopNavigation';
 
 const Learn = () => {
   return (
     <SafeAreaView>
       <View>
-        <View style={styles.topNav}>
+        <ScrollView>
+          <View style={styles.topNav}>
+            <View
+              style={{
+                marginLeft: 20,
+                marginTop: 50,
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+            >
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  backgroundColor: 'white',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 12,
+                }}
+              >
+                <AntDesign
+                  name="arrowleft"
+                  size={24}
+                  color="black"
+                  onPress={() => navigation.goBack()}
+                />
+              </View>
+              <View>
+                <Text style={styles.topNavTitle}>Bài Tập</Text>
+              </View>
+            </View>
+          </View>
           <View
             style={{
               marginLeft: 20,
-              marginTop: 50,
-              flexDirection: 'row',
-              alignItems: 'center',
+              marginTop: 24,
             }}
-          >
-            <View
-              style={{
-                width: 40,
-                height: 40,
-                backgroundColor: 'white',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 12,
-              }}
-            >
-              <AntDesign
-                name="arrowleft"
-                size={24}
-                color="black"
-                onPress={() => navigation.goBack()}
-              />
-            </View>
-            <View>
-              <Text style={styles.topNavTitle}>Bài Tập</Text>
-            </View>
-          </View>
-        </View>
-        <View
-          style={{
-            marginLeft: 20,
-            marginTop: 24,
-          }}
-        >
-          <ButtonLearn />
-        </View>
-        <View style={{ marginTop: 24 }}>
-          <CardCategories />
-        </View>
+          ></View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

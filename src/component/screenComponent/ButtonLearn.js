@@ -63,13 +63,15 @@ export const ButtonLearn = ({ navigation }) => {
 const styles = StyleSheet.create({
   textActive: {
     color: 'white',
-    width: 125,
+    width: 'auto',
     height: 40,
+    fontSize: 18,
   },
   text: {
     color: '#6683FE',
-    width: 125,
+    width: 'auto',
     height: 40,
+    fontSize: 18,
   },
   buttonView: {
     backgroundColor: 'white',
